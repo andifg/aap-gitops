@@ -6,7 +6,7 @@ resources:
 
 
 patches:
-  - path: patch-apps-applicationset-list.yml
+  - path: patch-app-list.yml
     target:
       kind: ApplicationSet
       name: apps

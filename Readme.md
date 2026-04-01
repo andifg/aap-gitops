@@ -13,7 +13,7 @@ The **root application** is an Argo CD `Application` that points at this reposit
 
 ### Configure the Git source
 
-Before applying, edit `bootstrap/base/root-application.yaml` so it matches **your** Git remote and branch:
+Before applying, edit `bootstrap/base/root-application.yml` so it matches **your** Git remote and branch:
 
 - `spec.source.repoURL` — HTTPS or SSH URL of this repository.
 - `spec.source.targetRevision` — branch, tag, or commit (for example `main`).
@@ -49,4 +49,4 @@ oc apply -k bootstrap/prod-cluster
 
 ### Other environments
 
-Copy `bootstrap/prod-cluster` to a new directory (for example `bootstrap/test-cluster`), point `resources` at `../base`, and add a JSON6902 patch (same shape as `patch-root-application.yaml`) that sets `spec.source.path` and namespaces for that environment. Then run `kustomize build bootstrap/<overlay> | oc apply -f -`.
+Copy `bootstrap/prod-cluster` to a new directory (for example `bootstrap/test-cluster`), point `resources` at `../base`, and add a JSON6902 patch (same shape as `patch-root-application.yml`) that sets `spec.source.path` and namespaces for that environment. Then run `kustomize build bootstrap/<overlay> | oc apply -f -`.
