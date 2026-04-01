@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - subscription.yml
 - operator-group.yml
+- project.yml

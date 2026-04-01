@@ -3,4 +3,4 @@
   value: stable-2.4
 - op: replace
   path: /spec/startingCSV
-  value: "aap-operator.v2.4.0-0.1774577278"
+  value: aap-operator.v2.4.0-0.1774577278
