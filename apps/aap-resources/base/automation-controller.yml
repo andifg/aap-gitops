@@ -1,0 +1,7 @@
+kind: AutomationController
+apiVersion: automationcontroller.ansible.com/v1beta1
+metadata:
+  namespace: aap
+  name: automation-controller
+spec:
+  postgres_configuration_secret: aap-db-connection

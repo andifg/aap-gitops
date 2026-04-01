@@ -9,7 +9,7 @@ spec:
       - name: aap-operator
         path: apps/aap-operator/2.4
         namespace: aap
-        syncWave: "6"
+        syncWave: "5"
       # - name: aap-operator
       #   path: apps/aap-operator/2.6
       #   namespace: aap
@@ -17,4 +17,8 @@ spec:
       - name: aap-external-db
         path: apps/cloud-native-pg-ressources/test-cluster
         namespace: aap-db
+        syncWave: "5"
+      - name: aap-instance
+        path: apps/aap-resources/test-cluster
+        namespace: aap
         syncWave: "6"
