@@ -10,3 +10,7 @@ spec:
         path: apps/aap-operator/overlays/2.4
         namespace: aap
         syncWave: "6"
+      # - name: aap-operator
+      #   path: apps/aap-operator/overlays/2.6
+      #   namespace: aap
+      #   syncWave: "6"

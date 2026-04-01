@@ -6,7 +6,11 @@ spec:
   generators:
   - list:
       elements:
-      - name: k8s-dasbhoard
-        path: components/apps/kubernetes-dashboard/overlays/k8s-default
-        namespace: k8s-dashboard
+      - name: aap-operator
+        path: apps/aap-operator/overlays/2.4
+        namespace: aap
         syncWave: "6"
+      # - name: aap-operator
+      #   path: apps/aap-operator/overlays/2.4
+      #   namespace: aap
+      #   syncWave: "6"
