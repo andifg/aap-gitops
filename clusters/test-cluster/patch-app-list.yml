@@ -14,3 +14,7 @@ spec:
       #   path: apps/aap-operator/2.6
       #   namespace: aap
       #   syncWave: "6"
+      - name: aap-external-db
+        path: apps/cloud-native-pg-ressources/test-cluster
+        namespace: aap-db
+        syncWave: "6"
