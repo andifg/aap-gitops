@@ -9,6 +9,7 @@ The **root application** is an Argo CD `Application` that points at this reposit
 - `oc` configured for the target OpenShift cluster.
 - Argo CD installed and the Argo CD namespace available (this repo’s `bootstrap/prod-cluster` overlay sets the app to namespace `argocd`).
 - Argo CD **repository access** configured so it can clone the Git remote you use in the Application (for example a `Secret` of type `repository` / credentials template, SSH deploy key, or token for HTTPS private repos—see [declarative setup](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#repositories) in the Argo CD docs).
+- **Database and AAP passwords** — create the real credentials **manually** in the cluster (for example with `oc create secret` or your secrets tooling) in the **database** namespace (for example `aap-db` for the CloudNativePG app user secret) and the **AAP** namespace (`aap`) where Ansible Automation Platform expects them. Do not deploy production clusters with placeholder passwords from this repository alone.
 - [Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/) **or** use `kubectl` / `oc` with built-in kustomize support.
 
 ### Configure the Git source
