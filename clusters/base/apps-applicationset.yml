@@ -24,7 +24,7 @@ spec:
       syncPolicy:
         automated: {}
       source:
-        repoURL: https://github.com/andifg/gitopsify.git
+        repoURL: git@github.com:andifg/aap-gitops.git
         targetRevision: main
         path: '{{.path}}'
       destination:

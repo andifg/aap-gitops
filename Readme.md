@@ -13,12 +13,19 @@ The **root application** is an Argo CD `Application` that points at this reposit
 
 ### Configure the Git source
 
-Before applying, edit `bootstrap/base/root-application.yml` so it matches **your** Git remote and branch:
+Point **both** the root Application and the apps ApplicationSet at the same Git remote and revision, or child Applications will clone the wrong repo or ref.
 
-- `spec.source.repoURL` — HTTPS or SSH URL of this repository.
-- `spec.source.targetRevision` — branch, tag, or commit (for example `main`).
+1. **`bootstrap/base/root-application.yml`** — set on the root `Application`:
+   - `spec.source.repoURL` — HTTPS or SSH URL of this repository.
+   - `spec.source.targetRevision` — branch, tag, or commit (for example `main`).
 
-The `bootstrap/prod-cluster` overlay only patches `spec.source.path`, `metadata.namespace`, and `spec.destination.namespace`. Add another overlay or extend the patch if you need a different path or Argo CD namespace.
+2. **`clusters/base/apps-applicationset.yml`** — set on `spec.template.spec.source` (the template used for each generated `Application`):
+   - `repoURL` — same URL as the root application.
+   - `targetRevision` — same branch, tag, or commit as the root application.
+
+The `path` for each app still comes from the ApplicationSet list generator (for example via cluster overlays such as `clusters/<env>/patch-app-list.yml`).
+
+The `bootstrap/prod-cluster` overlay only patches the root app’s `spec.source.path`, `metadata.namespace`, and `spec.destination.namespace`. Add another overlay or extend the patch if you need a different path or Argo CD namespace.
 
 ### Apply with Kustomize and `oc`
 
@@ -33,20 +40,3 @@ Preview without applying:
 ```bash
 kustomize build bootstrap/prod-cluster
 ```
-
-### Apply with `oc` / `kubectl` kustomize
-
-If your client bundles kustomize (`oc apply -k`):
-
-```bash
-oc apply -k bootstrap/prod-cluster
-```
-
-### After apply
-
-- Confirm the app exists: `oc get application cluster-config-app-of-apps -n argocd`
-- Open the Argo CD UI and sync **cluster-config-app-of-apps**, or rely on automated sync if enabled in the manifest.
-
-### Other environments
-
-Copy `bootstrap/prod-cluster` to a new directory (for example `bootstrap/test-cluster`), point `resources` at `../base`, and add a JSON6902 patch (same shape as `patch-root-application.yml`) that sets `spec.source.path` and namespaces for that environment. Then run `kustomize build bootstrap/<overlay> | oc apply -f -`.
