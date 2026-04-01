@@ -3,7 +3,7 @@
   value: clusters/overlays/test-cluster
 - op: replace
   path: /metadata/namespace
-  value: argocd
+  value: openshift-gitops
 - op: replace
   path: /spec/destination/namespace
-  value: argocd
+  value: openshift-gitops
