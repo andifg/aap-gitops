@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-config-app-of-apps
+  namespace: patch-me
+spec:
+  destination:
+    namespace: patch-me-see-overlays
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: patch-me-see-overlays
+    repoURL: git@github.com:andifg/aap-gitops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+spec:
+  generators:
+  - list:
+      elements:
+      - name: aap-operator
+        path: apps/aap-operator/overlays/2.4
+        namespace: aap
+        syncWave: "6"

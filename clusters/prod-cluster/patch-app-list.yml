@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+spec:
+  generators:
+  - list:
+      elements:
+      - name: k8s-dasbhoard
+        path: components/apps/kubernetes-dashboard/overlays/k8s-default
+        namespace: k8s-dashboard
+        syncWave: "6"
