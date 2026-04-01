@@ -8,4 +8,4 @@ patches:
 - path: patch-root-application.yml
   target:
     kind: Application
-    name: cluster-config-app-of-apps
+    name: aap-gitops-app-of-apps
