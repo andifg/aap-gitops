@@ -9,4 +9,3 @@ spec:
   name: ansible-automation-platform-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: patch-me
