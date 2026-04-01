@@ -5,7 +5,7 @@ resources:
 - ../base
 
 patches:
-  - path: patch-subscription-channel-version.yml
+  - path: patch-version.yml
     target:
       kind: Subscription
       name: aap-operator
