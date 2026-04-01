@@ -4,4 +4,6 @@ metadata:
   name: aap
   namespace: aap
 spec:
-  {}
+  targetNamespaces:
+  - aap
+  upgradeStrategy: Default
