@@ -1,6 +1,6 @@
 - op: replace
   path: /spec/source/path
-  value: clusters/overlays/prod-cluster
+  value: clusters/prod-cluster
 - op: replace
   path: /metadata/namespace
   value: openshift-gitops
