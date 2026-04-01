@@ -1,3 +1,6 @@
 - op: replace
   path: /spec/channel
   value: stable-2.4
+- op: replace
+  path: /spec/startingCSV
+  value: "2.4.0+0.1774577278"
