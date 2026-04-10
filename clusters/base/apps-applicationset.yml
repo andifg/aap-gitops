@@ -21,8 +21,7 @@ spec:
         gitops: operator
     spec:
       project: default
-      syncPolicy:
-        automated: {}
+      syncPolicy: {}
       source:
         repoURL: git@github.com:andifg/aap-gitops.git
         targetRevision: main
