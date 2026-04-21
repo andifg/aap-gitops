@@ -1,0 +1,23 @@
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: aap
+  namespace: aap
+spec:
+  image_pull_policy: IfNotPresent
+
+  database:
+    database_secret: aap-gateway-db
+
+  controller:
+    disabled: false
+    postgres_configuration_secret: aap-controller-db
+
+  hub:
+    disabled: true
+
+  eda:
+    disabled: true
+
+  lightspeed:
+    disabled: true
