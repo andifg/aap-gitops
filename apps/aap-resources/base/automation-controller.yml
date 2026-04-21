@@ -4,4 +4,9 @@ metadata:
   namespace: aap
   name: automation-controller
 spec:
-  postgres_configuration_secret: aap-db-connection
+  #postgres_configuration_secret: aap-db-connection
+  postgres_extra_args:
+  - '-c'
+  - 'shared_preload_libraries=pgaudit'
+  - '-c'
+  - 'pgaudit.log=all'
