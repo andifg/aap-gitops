@@ -14,10 +14,12 @@ spec:
 
   bootstrap:
     initdb:
-      database: aap
+      database: aap-controller
       owner: aap-user
       secret:
         name: aap-db-secret
+      postInitSQL:
+        - CREATE DATABASE "aap-gateway" OWNER "aap-user";
 
   # Require 1Gi of space
   storage:
