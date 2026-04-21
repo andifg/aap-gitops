@@ -1,0 +1,14 @@
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/ubi-minimal:9.7
+
+ARG OCP_VERSION=4.20.0
+
+RUN microdnf install -y --nodocs tar gzip && microdnf clean all \
+  && curl -sSLf "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OCP_VERSION}/openshift-client-linux.tar.gz" -o /tmp/oc.tgz \
+  && tar -C /usr/local/bin -xzf /tmp/oc.tgz oc kubectl \
+  && chmod +x /usr/local/bin/oc /usr/local/bin/kubectl \
+  && rm -f /tmp/oc.tgz \
+  && oc version --client
+
+RUN microdnf install -y --nodocs postgresql bash && microdnf clean all
+
+WORKDIR /restore

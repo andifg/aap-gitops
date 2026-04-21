@@ -1,0 +1,75 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: aap-restore-backup
+spec:
+  schedule: "0 2 * * *"
+  suspend: true
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: quay.io/redhatt/oc-psql:latest
+              imagePullPolicy: Always
+              workingDir: /backups
+              command: ["/bin/bash", "/scripts/backup.sh"]
+              volumeMounts:
+                - name: backup-data
+                  mountPath: /backups
+                - name: backup-script
+                  mountPath: /scripts
+                  readOnly: true
+              env:
+                - name: NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: controller_deployment
+                  value: automation-controller
+                - name: controller_web_deployment
+                  value: automation-controller-web
+                - name: PGHOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: aap-db-connection
+                      key: host
+                - name: PGPORT
+                  valueFrom:
+                    secretKeyRef:
+                      name: aap-db-connection
+                      key: port
+                - name: PGDATABASE
+                  valueFrom:
+                    secretKeyRef:
+                      name: aap-db-connection
+                      key: database
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: aap-db-connection
+                      key: username
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: aap-db-connection
+                      key: password
+                - name: PGSSLMODE
+                  valueFrom:
+                    secretKeyRef:
+                      name: aap-db-connection
+                      key: sslmode
+          volumes:
+            - name: backup-data
+              persistentVolumeClaim:
+                claimName: aap-restore-backups
+            - name: backup-script
+              configMap:
+                name: aap-restore-backup
+                defaultMode: 0755
